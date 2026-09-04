@@ -7,7 +7,7 @@
 <meta name="description" content="You are warmly invited. Tap to open your invitation.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
-<meta name="theme-color" content="#2E2118">
+<meta name="theme-color" content="#5D5F48">
 
 <!-- Share preview. Swap assets/tulip.jpg for another image any time. -->
 <meta property="og:title" content="The Wedding of Mirza Haqeem &amp; Farah Farhana | Friday 25/12/2026">
@@ -17,24 +17,27 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Sacramento&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alice&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Sacramento&family=Luxurious+Script&display=swap" rel="stylesheet">
 
 <style>
 /* =====================================================================
    PALETTE — kampung wooden hall at night: walnut, cream, blush tulips
    ===================================================================== */
 :root{
-  --walnut:      #2E2118;   /* the ground behind the card */
-  --walnut-deep: #1F1610;
-  --cream:       #FAF5EC;   /* the card */
-  --paper:       #FFFDF8;   /* raised blocks on the card */
-  --blush:       #D9A0A6;   /* tulip petals */
-  --blush-deep:  #B8737C;   /* tulip accents, wish rule */
-  --sage:        #7E8C6E;   /* stems */
-  --thread:      #B4915C;   /* lace, dividers */
-  --heading:     #4A3626;   /* names and section titles */
-  --ink:         #33291F;
-  --ink-soft:    #7A6D5F;
+  /* Palette sampled from coverpage.jpeg: ivory paper, olive-ink script,
+     terracotta roof tiles, dusty-rose ribbon, muted sage leaves. */
+  --walnut:      #332A19;   /* the ground behind the card — dark wood tone */
+  --walnut-deep: #241D12;
+  --cream:       #F3EEE3;   /* the card — sampled paper */
+  --paper:       #FCF8F0;   /* raised blocks on the card */
+  --blush:       #C9A79C;   /* tulip petals — dusty rose ribbon */
+  --blush-deep:  #A97F6E;   /* tulip accents, wish rule */
+  --sage:        #8B8D6C;   /* stems — muted watercolor leaf */
+  --grass:       #5D5F48;   /* nav bar — sampled from the lawn */
+  --thread:      #A57C55;   /* lace, dividers — terracotta roof */
+  --heading:     #4F4933;   /* names and section titles — olive ink */
+  --ink:         #2E2A1C;
+  --ink-soft:    #7C7458;
 
   --card-w: 430px;
   --gut: 26px;
@@ -42,11 +45,11 @@
   /* Type scale — every font-size in this file should reference one of these.
      Keeping it to a handful of steps is what makes the page read as
      "designed" instead of a pile of one-off sizes. */
-  --fs-2xs:    .68rem;   /* tab bar labels, credit line, smallest captions */
+  --fs-2xs:    .68rem;   /* tab bar labels, smallest captions */
   --fs-xs:     .78rem;   /* field labels, eyebrows, small captions */
   --fs-sm:     .88rem;   /* secondary body text, buttons, list items */
   --fs-base:   1rem;     /* primary body copy, form inputs */
-  --fs-lg:     1.3rem;   /* sub-emphasis: FAQ questions, detail month */
+  --fs-lg:     1.3rem;   /* sub-emphasis: detail month */
   --fs-xl:     1.6rem;   /* section headings, countdown numerals */
   --fs-num:    2.8rem;   /* the big date numeral */
   --fs-display: clamp(2.4rem, 11vw, 3.2rem); /* the couple's names */
@@ -71,7 +74,7 @@ body{
 body.is-locked{ overflow:hidden; height:100vh; }
 
 h1,h2,h3{
-  font-family:'Italiana','Cormorant Garamond',Georgia,serif;
+  font-family:'Alice','Cormorant Garamond',Georgia,serif;
   font-weight:400; letter-spacing:.03em; margin:0; line-height:1.18;
   color:var(--heading);
 }
@@ -129,53 +132,49 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
    ===================================================================== */
 #cover{
   position:fixed; inset:0; z-index:60;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  padding:40px 28px; text-align:center;
-  color:var(--cream);
-  background-image:linear-gradient(rgba(31,22,16,.68), rgba(31,22,16,.68)), url('assets/tulip.jpg');
+  display:block; width:100%; height:100%;
+  margin:0; padding:0; border:none; cursor:pointer;
+  -webkit-appearance:none; appearance:none; -webkit-tap-highlight-color:transparent;
+  background-image:url('assets/coverpage.jpeg');
   background-size:cover; background-position:center;
   transition:transform 1.15s cubic-bezier(.7,0,.25,1), opacity 1.15s ease;
 }
 #cover.lifted{ transform:translateY(-102%); opacity:0; }
 
-.cover__inner{ width:100%; max-width:320px; }
-.cover__eyebrow{
-  font-size:var(--fs-xs); letter-spacing:.34em; text-transform:uppercase;
-  color:rgba(250,245,236,.8); margin-bottom:20px; text-shadow:0 2px 10px rgba(0,0,0,.4);
+.cover__cta{
+  position:absolute; left:50%; bottom:calc(48px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  display:inline-flex; align-items:center; gap:9px;
+  color:var(--heading); font-family:'Karla',sans-serif;
+  font-size:var(--fs-sm); font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  text-shadow:0 1px 3px rgba(243,238,227,.9), 0 1px 14px rgba(243,238,227,.7);
+  animation:coverCtaPulse 2.6s ease-in-out infinite;
 }
-.cover__names{ font-size:var(--fs-display); color:var(--cream); text-shadow:0 2px 18px rgba(0,0,0,.45); }
-.cover__amp{ display:block; font-family:var(--font-script); font-size:var(--fs-script); color:var(--blush); margin:2px 0; letter-spacing:0; }
-.cover__date{
-  margin:16px 0 36px; font-size:var(--fs-sm); letter-spacing:.18em;
-  color:rgba(250,245,236,.85); text-shadow:0 2px 10px rgba(0,0,0,.4);
-}
-
-.envelope{
-  display:block; margin:0 auto; padding:0; width:100%; max-width:260px;
-  border:none; background:none; cursor:pointer;
-  filter:drop-shadow(0 14px 30px rgba(0,0,0,.45));
-  transition:transform .18s ease;
-}
-.envelope:active{ transform:scale(.97); }
-.envelope:focus-visible{ outline:2px solid var(--blush); outline-offset:6px; }
-.envelope__art{ width:100%; height:auto; display:block; }
-.envelope__mono{ font-family:var(--font-script); font-size:26px; fill:var(--heading); }
-
-.cover__hint{
-  margin-top:18px; font-size:var(--fs-xs); letter-spacing:.18em; text-transform:uppercase;
-  color:rgba(250,245,236,.75); text-shadow:0 2px 10px rgba(0,0,0,.4);
+.cover__cta svg{ width:13px; height:13px; filter:drop-shadow(0 1px 3px rgba(243,238,227,.9)); }
+@keyframes coverCtaPulse{
+  0%,100%{ transform:translateX(-50%) scale(1); }
+  50%{ transform:translateX(-50%) scale(1.05); }
 }
 
 /* =====================================================================
    VIDEO HERO
    ===================================================================== */
-.hero{ position:relative; width:100%; aspect-ratio:9/16; max-height:78vh; overflow:hidden; background:var(--walnut); }
-.hero video{ width:100%; height:100%; object-fit:cover; display:block; }
-.hero__fade{
-  position:absolute; inset:auto 0 0 0; height:120px;
-  background:linear-gradient(to bottom, transparent, var(--cream));
-  pointer-events:none;
+.hero{
+  position:relative; width:100%; padding:54px 0 60px;
+  display:flex; align-items:center; justify-content:center;
+  background-image:linear-gradient(rgba(36,29,18,.32), rgba(243,238,227,.6) 90%), url('assets/coverpage.jpeg');
+  background-size:cover; background-position:center 62%;
+  overflow:hidden;
 }
+.hero__frame{ position:relative; width:min(78%,310px); aspect-ratio:1; }
+.hero__lace{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.hero__lace .lace-ring-o{ fill:none; stroke:var(--thread); stroke-width:1; opacity:.85; }
+.hero__lace .lace-ring-d{ fill:var(--thread); opacity:.6; }
+.hero__disc{
+  position:absolute; inset:9%; border-radius:50%; overflow:hidden;
+  box-shadow:0 12px 32px rgba(36,29,18,.35);
+}
+.hero__disc video{ width:100%; height:100%; object-fit:cover; display:block; }
 
 /* =====================================================================
    OPENING
@@ -190,37 +189,40 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
 
 .invite-line{ color:var(--ink-soft); max-width:32ch; margin:0 auto 34px; }
 .couple{ font-size:var(--fs-display); }
+.couple #g-groom, .couple #g-bride{ font-family:'Luxurious Script', cursive; letter-spacing:.02em; }
 .couple .amp{ display:block; margin:0; font-family:var(--font-script); font-size:var(--fs-script); color:var(--blush-deep); letter-spacing:0; }
 
 /* =====================================================================
    STORY
    ===================================================================== */
-.story{ text-align:left; max-width:34ch; margin:0 auto; }
-.story p{ margin-bottom:1.2em; }
-.story p:first-of-type{
-  font-family:'Italiana',serif; font-size:var(--fs-xl); line-height:1.3;
-  color:var(--heading); text-align:center; margin-bottom:1em;
-}
-.story p:last-of-type{ font-style:italic; text-align:center; color:var(--blush-deep); margin-bottom:0; }
+.story{ text-align:center; max-width:34ch; margin:0 auto; }
+.story p{ margin-bottom:1.2em; font-style:italic; }
+.story p:last-of-type{ color:var(--blush-deep); margin-bottom:0; }
 
 /* =====================================================================
    DETAILS
    ===================================================================== */
-.detail-block{ background:var(--paper); border:1px solid rgba(180,145,92,.3); padding:32px 22px; }
+.detail-block{ background:var(--paper); border:1px solid rgba(165,124,85,.3); padding:32px 22px; }
 .detail-day{ font-size:var(--fs-xs); letter-spacing:.3em; text-transform:uppercase; color:var(--thread); margin:0; }
-.detail-date{ font-family:'Italiana',serif; font-size:var(--fs-num); color:var(--heading); line-height:1; margin:8px 0 4px; }
-.detail-month{ font-family:'Italiana',serif; font-size:var(--fs-lg); color:var(--heading); letter-spacing:.1em; margin:0; }
+.detail-date{ font-family:'Alice',serif; font-size:var(--fs-num); color:var(--heading); line-height:1; margin:8px 0 4px; }
+.detail-month{ font-family:'Alice',serif; font-size:var(--fs-lg); color:var(--heading); letter-spacing:.1em; margin:0; }
 .detail-hijri{ font-size:var(--fs-xs); color:var(--ink-soft); margin:8px 0 0; }
-.detail-time{ margin:20px 0 0; padding-top:20px; border-top:1px solid rgba(180,145,92,.3); font-weight:500; }
+.detail-time{ margin:20px 0 0; padding-top:20px; border-top:1px solid rgba(165,124,85,.3); font-weight:500; }
 .detail-venue{ margin:6px 0 0; color:var(--ink-soft); font-size:var(--fs-sm); }
 .detail-venue strong{ display:block; color:var(--ink); font-weight:600; font-size:var(--fs-base); }
 
 /* =====================================================================
    COUNTDOWN
    ===================================================================== */
+.countdown-section{
+  background-image:linear-gradient(rgba(36,29,18,.5), rgba(36,29,18,.5)), url('assets/grassbackground.jpeg');
+  background-size:cover; background-position:center;
+}
+.countdown-section h2{ color:var(--cream); }
+.countdown-section .rule{ color:rgba(243,238,227,.6); }
 .countdown{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
-.cd__cell{ padding:14px 4px; border:1px solid rgba(74,54,38,.16); background:var(--paper); }
-.cd__num{ font-family:'Italiana',serif; font-size:var(--fs-xl); color:var(--heading); line-height:1; }
+.cd__cell{ padding:14px 4px; border:1px solid rgba(79,73,51,.16); background:var(--paper); }
+.cd__num{ font-family:'Alice',serif; font-size:var(--fs-xl); color:var(--heading); line-height:1; }
 .cd__lab{ font-size:var(--fs-2xs); letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); margin-top:6px; }
 .cd__passed{ grid-column:1/-1; color:var(--blush-deep); font-style:italic; margin:0; }
 
@@ -231,7 +233,7 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
 .prog ul{ margin:0; padding:0; list-style:none; }
 .prog li{
   display:grid; grid-template-columns:76px 1fr; gap:16px;
-  padding:14px 0; border-bottom:1px dashed rgba(180,145,92,.45);
+  padding:14px 0; border-bottom:1px dashed rgba(165,124,85,.45);
 }
 .prog li:last-child{ border-bottom:none; }
 .prog time{ font-weight:600; color:var(--heading); font-size:var(--fs-sm); padding-top:2px; }
@@ -263,18 +265,18 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
 .field input,.field select,.field textarea{
   width:100%; padding:12px 13px;
   font-family:'Karla',sans-serif; font-size:var(--fs-base); color:var(--ink);
-  background:var(--paper); border:1px solid rgba(180,145,92,.5); border-radius:2px;
+  background:var(--paper); border:1px solid rgba(165,124,85,.5); border-radius:2px;
 }
 .field textarea{ min-height:88px; resize:vertical; }
 .field input:focus,.field select:focus,.field textarea:focus{
-  outline:none; border-color:var(--heading); box-shadow:0 0 0 3px rgba(74,54,38,.12);
+  outline:none; border-color:var(--heading); box-shadow:0 0 0 3px rgba(79,73,51,.12);
 }
 .field input.err{ border-color:var(--blush-deep); }
 .radio-row{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
 .radio-row label{
   display:flex; align-items:center; justify-content:center; gap:7px;
   padding:12px 8px; font-size:var(--fs-sm); color:var(--ink);
-  border:1px solid rgba(180,145,92,.5); background:var(--paper); cursor:pointer;
+  border:1px solid rgba(165,124,85,.5); background:var(--paper); cursor:pointer;
 }
 .radio-row input{ width:auto; accent-color:var(--heading); }
 .radio-row input:checked + span{ font-weight:600; color:var(--heading); }
@@ -283,7 +285,7 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
 .form-note strong{ color:var(--blush-deep); font-weight:600; }
 .form-ok{
   display:none; margin-top:16px; padding:14px;
-  background:rgba(126,140,110,.13); border:1px solid rgba(126,140,110,.55);
+  background:rgba(139,141,108,.13); border:1px solid rgba(139,141,108,.55);
   font-size:var(--fs-sm); color:#46553A;
 }
 .form-ok.show{ display:block; }
@@ -291,36 +293,18 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
 /* =====================================================================
    WISHES
    ===================================================================== */
-.wishes{ margin-top:30px; display:grid; gap:10px; text-align:left; }
+.wishes{ display:grid; gap:10px; text-align:left; }
 .wish{ background:var(--paper); border-left:2px solid var(--blush-deep); padding:13px 15px; }
 .wish__who{ font-weight:600; font-size:var(--fs-sm); color:var(--heading); margin:0; }
 .wish__msg{ font-size:var(--fs-sm); margin:4px 0 0; }
 .wishes-empty{ color:var(--ink-soft); font-size:var(--fs-sm); font-style:italic; margin:0; }
 
 /* =====================================================================
-   FAQ  (opens on tap — motion answering an action)
-   ===================================================================== */
-.faq{ text-align:left; }
-.faq details{ border-bottom:1px solid rgba(180,145,92,.4); }
-.faq details:first-child{ border-top:1px solid rgba(180,145,92,.4); }
-.faq summary{
-  list-style:none; cursor:pointer; padding:16px 0;
-  font-family:'Italiana',serif; font-size:var(--fs-lg); color:var(--heading);
-  display:flex; justify-content:space-between; align-items:center; gap:12px;
-}
-.faq summary::-webkit-details-marker{ display:none; }
-.faq summary::after{ content:"+"; font-family:'Karla',sans-serif; font-size:var(--fs-lg); color:var(--thread); flex:none; transition:transform .2s ease; }
-.faq details[open] summary::after{ transform:rotate(45deg); }
-.faq summary:focus-visible{ outline:2px solid var(--thread); outline-offset:2px; }
-.faq .a{ padding:0 0 18px; font-size:var(--fs-base); color:var(--ink); max-width:40ch; }
-.faq .a strong{ font-weight:600; color:var(--blush-deep); }
-
-/* =====================================================================
    GIFT — two QR boxes
    ===================================================================== */
 .gift-intro{ color:var(--ink-soft); max-width:30ch; margin:0 auto 26px; }
 .qr-pair{ display:grid; gap:22px; }
-.qr-box{ background:var(--paper); border:1px solid rgba(180,145,92,.4); padding:18px 16px 16px; }
+.qr-box{ background:var(--paper); border:1px solid rgba(165,124,85,.4); padding:18px 16px 16px; }
 .qr-box img{ width:100%; max-width:210px; aspect-ratio:1; display:block; margin:0 auto 12px; }
 .qr-name{ font-weight:600; font-size:var(--fs-sm); margin:0; color:var(--heading); }
 .qr-bank{ font-size:var(--fs-xs); color:var(--ink-soft); margin:2px 0 0; }
@@ -329,7 +313,7 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
    CONTACT
    ===================================================================== */
 .contact{ display:grid; gap:14px; }
-.contact__row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:14px; border-bottom:1px dashed rgba(180,145,92,.45); }
+.contact__row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:14px; border-bottom:1px dashed rgba(165,124,85,.45); }
 .contact__row:last-child{ border-bottom:none; padding-bottom:0; }
 .contact__who{ text-align:left; }
 .contact__who strong{ display:block; font-weight:600; font-size:var(--fs-sm); }
@@ -348,10 +332,9 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
    ===================================================================== */
 .closing{ background:var(--walnut); color:var(--cream); padding-bottom:calc(50px + 84px + env(safe-area-inset-bottom)); }
 .closing h2{ color:var(--cream); }
-.closing .rule{ color:rgba(250,245,236,.45); }
-.closing p{ color:rgba(250,245,236,.86); max-width:32ch; margin-inline:auto; }
+.closing .rule{ color:rgba(243,238,227,.45); }
+.closing p{ color:rgba(243,238,227,.86); max-width:32ch; margin-inline:auto; }
 .closing .doa{ font-style:italic; }
-.credit{ font-size:var(--fs-2xs); letter-spacing:.14em; text-transform:uppercase; color:rgba(250,245,236,.4); margin:26px 0 0; }
 
 /* =====================================================================
    MUSIC TOGGLE
@@ -362,7 +345,7 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
   width:46px; height:46px; border-radius:50%;
   display:none; place-items:center;
   background:var(--cream); color:var(--heading);
-  border:1px solid rgba(180,145,92,.7);
+  border:1px solid rgba(165,124,85,.7);
   box-shadow:0 4px 18px rgba(0,0,0,.35); cursor:pointer;
 }
 #music.show{ display:grid; }
@@ -378,28 +361,28 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
   position:fixed; z-index:60; left:50%; transform:translateX(-50%);
   bottom:0; width:100%; max-width:var(--card-w);
   display:none; grid-template-columns:repeat(5,1fr);
-  background:var(--cream);
-  border-top:1px solid rgba(180,145,92,.35);
-  box-shadow:0 -6px 24px rgba(0,0,0,.18);
+  background:var(--grass);
+  border-top:1px solid rgba(243,238,227,.16);
+  box-shadow:0 -6px 24px rgba(0,0,0,.28);
   padding-bottom:env(safe-area-inset-bottom);
 }
 #tabbar.show{ display:grid; }
 #tabbar .tab{
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
-  padding:10px 2px 9px; background:none; border:none; color:var(--ink-soft);
+  padding:10px 2px 9px; background:none; border:none; color:rgba(243,238,227,.68);
   font-family:'Karla',sans-serif; font-size:var(--fs-2xs); letter-spacing:.02em;
   cursor:pointer;
 }
 #tabbar .tab svg{ width:20px; height:20px; flex:none; }
-#tabbar .tab.active{ color:var(--heading); }
-#tabbar .tab:focus-visible{ outline:2px solid var(--thread); outline-offset:-2px; }
+#tabbar .tab.active{ color:var(--cream); }
+#tabbar .tab:focus-visible{ outline:2px solid var(--cream); outline-offset:-2px; }
 
 /* =====================================================================
    MODALS (Details / RSVP / Gift / Contact, launched from the tab bar)
    ===================================================================== */
 #modal-overlay{
   position:fixed; inset:0; z-index:58;
-  background:rgba(31,22,16,.6);
+  background:rgba(36,29,18,.6);
   opacity:0; visibility:hidden; pointer-events:none;
   transition:opacity .25s ease;
 }
@@ -420,12 +403,12 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
 .modal-title{ text-align:center; margin-bottom:20px; }
 .modal-close{
   position:absolute; top:14px; right:14px; z-index:1;
-  width:32px; height:32px; display:grid; place-items:center; border-radius:50%;
-  border:1px solid rgba(180,145,92,.4); background:var(--paper);
-  color:var(--ink-soft); font-size:var(--fs-xs); line-height:1; cursor:pointer;
+  width:32px; height:32px; display:grid; place-items:center;
+  border:none; background:none;
+  color:var(--ink-soft); font-size:1.3rem; line-height:1; cursor:pointer;
 }
 .modal-close:focus-visible{ outline:2px solid var(--thread); outline-offset:2px; }
-.modal-divider{ height:1px; background:rgba(180,145,92,.35); margin:30px 0 26px; }
+.modal-divider{ height:1px; background:rgba(165,124,85,.35); margin:30px 0 26px; }
 
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
@@ -447,20 +430,20 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
       <path d="M0 27 C8 25 12 31 10 37 C4 37 1 33 0 29" fill="currentColor" opacity=".75"/>
     </g>
     <pattern id="lace" width="43" height="26" patternUnits="userSpaceOnUse">
-      <path d="M0 0 H43 V6 A21.5 21.5 0 0 1 0 6 Z" fill="#B4915C" opacity=".14"/>
-      <path d="M0 6 A21.5 21.5 0 0 0 43 6" fill="none" stroke="#B4915C" stroke-width="1"/>
-      <circle cx="21.5" cy="12" r="2.7" fill="none" stroke="#B4915C" stroke-width="1"/>
-      <circle cx="10" cy="4" r="1.5" fill="#B4915C" opacity=".55"/>
-      <circle cx="33" cy="4" r="1.5" fill="#B4915C" opacity=".55"/>
-      <path d="M21.5 19 l2.4 3.4 -2.4 3.4 -2.4 -3.4 Z" fill="#B4915C" opacity=".5"/>
-      <path d="M0 0 H43" stroke="#B4915C" stroke-width=".8" opacity=".6"/>
+      <path d="M0 0 H43 V6 A21.5 21.5 0 0 1 0 6 Z" fill="#A57C55" opacity=".14"/>
+      <path d="M0 6 A21.5 21.5 0 0 0 43 6" fill="none" stroke="#A57C55" stroke-width="1"/>
+      <circle cx="21.5" cy="12" r="2.7" fill="none" stroke="#A57C55" stroke-width="1"/>
+      <circle cx="10" cy="4" r="1.5" fill="#A57C55" opacity=".55"/>
+      <circle cx="33" cy="4" r="1.5" fill="#A57C55" opacity=".55"/>
+      <path d="M21.5 19 l2.4 3.4 -2.4 3.4 -2.4 -3.4 Z" fill="#A57C55" opacity=".5"/>
+      <path d="M0 0 H43" stroke="#A57C55" stroke-width=".8" opacity=".6"/>
     </pattern>
     <pattern id="tulips" width="120" height="120" patternUnits="userSpaceOnUse">
-      <g color="#D9A0A6" opacity=".26">
+      <g color="#C9A79C" opacity=".26">
         <use href="#sprig" transform="translate(30,26) scale(.85)"/>
         <use href="#sprig" transform="translate(90,86) scale(.85) rotate(180)"/>
       </g>
-      <g color="#B4915C" opacity=".2">
+      <g color="#A57C55" opacity=".2">
         <use href="#sprig" transform="translate(90,26) scale(.6) rotate(24)"/>
         <use href="#sprig" transform="translate(30,86) scale(.6) rotate(-24)"/>
       </g>
@@ -470,7 +453,7 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
 
 <div class="tulip-field" aria-hidden="true">
   <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <rect width="100%" height="100%" fill="#1F1610"/>
+    <rect width="100%" height="100%" fill="#241D12"/>
     <rect width="100%" height="100%" fill="url(#tulips)"/>
   </svg>
 </div>
@@ -478,28 +461,12 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
 <!-- ===================================================================
      COVER
      =================================================================== -->
-<div id="cover">
-  <div class="cover__inner">
-    <p class="cover__eyebrow">The Wedding of</p>
-    <h1 class="cover__names">
-      <span id="c-groom"></span>
-      <span class="cover__amp">&amp;</span>
-      <span id="c-bride"></span>
-    </h1>
-    <p class="cover__date" id="c-date"></p>
-
-    <button class="envelope" id="btn-open" aria-label="Open invitation">
-      <svg class="envelope__art" viewBox="0 0 300 220" aria-hidden="true">
-        <rect x="10" y="70" width="280" height="140" rx="2" fill="#FFFDF8" stroke="rgba(180,145,92,.45)"/>
-        <g transform="translate(10,70) rotate(32.7)"><rect x="0" y="-13" width="166.5" height="26" fill="url(#lace)"/></g>
-        <g transform="translate(290,70) rotate(147.3)"><rect x="0" y="-13" width="166.5" height="26" fill="url(#lace)"/></g>
-        <path d="M150 160 L10 70 M150 160 L290 70" stroke="rgba(180,145,92,.35)" stroke-width="1"/>
-        <text x="150" y="152" text-anchor="middle" class="envelope__mono" id="env-mono"></text>
-      </svg>
-    </button>
-    <p class="cover__hint">Tap envelope to open</p>
-  </div>
-</div>
+<button id="cover" aria-label="Open invitation">
+  <span class="cover__cta">
+    Tap to continue
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </span>
+</button>
 
 <!-- ===================================================================
      CARD
@@ -508,10 +475,17 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
 
   <!-- video hero -->
   <div class="hero">
-    <video id="hero-video" playsinline muted loop preload="metadata" poster="assets/video-poster.jpg">
-      <source src="assets/video.mp4" type="video/mp4">
-    </video>
-    <div class="hero__fade"></div>
+    <div class="hero__frame">
+      <svg class="hero__lace" viewBox="0 0 220 220" aria-hidden="true">
+        <circle class="lace-ring-o" cx="110" cy="110" r="103"/>
+        <g id="hero-lace-dots"></g>
+      </svg>
+      <div class="hero__disc">
+        <video id="hero-video" playsinline muted loop preload="metadata" poster="assets/video-poster.jpg">
+          <source src="assets/video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
   </div>
 
   <!-- opening -->
@@ -527,7 +501,7 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
 
     <h1 class="couple">
       <span id="g-groom"></span>
-      <span class="amp">and</span>
+      <span class="amp">&amp;</span>
       <span id="g-bride"></span>
     </h1>
   </section>
@@ -539,10 +513,8 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
     <div class="story" id="story"></div>
   </section>
 
-  <div class="rule"><svg viewBox="-14 -16 28 54"><use href="#tulip" fill="currentColor"/><path d="M0 12 L0 30" stroke="currentColor" stroke-width="1.6"/></svg></div>
-
   <!-- countdown -->
-  <section class="tight">
+  <section class="tight countdown-section">
     <h2>Counting the days</h2>
     <div class="rule"><svg viewBox="-14 -16 28 54"><use href="#tulip" fill="currentColor"/><path d="M0 12 L0 30" stroke="currentColor" stroke-width="1.6"/></svg></div>
     <div class="countdown" id="countdown">
@@ -560,11 +532,11 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
     <div class="prog"><ul id="prog-list"></ul></div>
   </section>
 
-  <!-- faq -->
+  <!-- wishes -->
   <section class="tight">
-    <h2>Good to know</h2>
-    <div class="rule"><svg viewBox="-14 -16 28 54"><use href="#tulip" fill="currentColor"/><path d="M0 12 L0 30" stroke="currentColor" stroke-width="1.6"/></svg></div>
-    <div class="faq" id="faq"></div>
+    <h2>Wishes &amp; blessings</h2>
+    <div class="rule rule--blush"><svg viewBox="-14 -16 28 54"><use href="#tulip" fill="currentColor"/><path d="M0 12 L0 30" stroke="currentColor" stroke-width="1.6"/></svg></div>
+    <div class="wishes" id="wishes"><p class="wishes-empty">Loading wishes…</p></div>
   </section>
 
   <svg class="lace lace--flip" viewBox="0 0 430 26" aria-hidden="true"><rect width="430" height="26" fill="url(#lace)"/></svg>
@@ -575,7 +547,6 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
     <div class="rule"><svg viewBox="-14 -16 28 54"><use href="#tulip" fill="currentColor"/><path d="M0 12 L0 30" stroke="currentColor" stroke-width="1.6"/></svg></div>
     <p class="arabic">بَارَكَ اللهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
     <p class="doa">May Allah bless you both, and unite you in goodness.</p>
-    <p class="credit" id="credit"></p>
   </section>
 
 </main>
@@ -621,10 +592,6 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
     <label for="r-pax">Number of guests, including you</label>
     <select id="r-pax"></select>
   </div>
-  <div class="field">
-    <label for="r-note">A note for the couple (optional)</label>
-    <textarea id="r-note" placeholder="Dietary needs, arriving late, anything we should know"></textarea>
-  </div>
   <div class="btn-row">
     <button class="btn btn--solid" id="btn-rsvp">Send RSVP</button>
   </div>
@@ -646,7 +613,6 @@ main.card > section.in{ opacity:1; transform:translateY(0); }
     <button class="btn" id="btn-wish">Send wish</button>
   </div>
   <div class="form-ok" id="wish-ok">Thank you — your wish has been sent to the couple.</div>
-  <div class="wishes" id="wishes"><p class="wishes-empty">Loading wishes…</p></div>
 </div>
 
 <div class="modal-panel" id="modal-gift" role="dialog" aria-modal="true" aria-label="Gift">
@@ -728,12 +694,12 @@ const CONFIG = {
     { time: "11:00 pm", what: "Photographs, and the evening ends" }
   ],
 
-  rsvpDeadline: "30 November 2026",
+  rsvpDeadline: "30.11.26",
   maxPax: 5,
 
   contacts: [
     { name: "Mirza Haqeem", role: "The groom", phone: "601110712203" },
-    { name: "Farah Farhana", role: "The bride", phone: "60189791051" }
+    { name: "Azam Hakeem", role: "Bride's brother", phone: "601127432713" }
   ],
 
   gifts: [
@@ -742,20 +708,10 @@ const CONFIG = {
   ],
 
   story: [
-    "It all began with a smile.",
-    "Among a crowd during a college activity, I saw her beautiful smile, and in that moment, my eyes couldn't look away. After a few attempts to get to know her, fate finally gave me a chance during Sports Day, where I managed to get her number — and that was the beginning of our story.",
-    "Seven years later, after countless memories, laughter, challenges, and lessons, we've grown through every bittersweet moment together. Every wound and bruise along the way only made our love stronger.",
-    "Today, we're taking our next step — not as \"me\" and \"you,\" but as \"us.\"",
-    "Here's to forever, hand in hand."
-  ],
-
-  faq: [
-    { q: "Can I bring a guest?",
-      a: "We are so excited to celebrate our special day surrounded by our closest family and friends. As we are keeping our celebration intimate, we kindly ask that you RSVP only for yourself and your immediate household. If you would like to bring someone else, please mention it in your RSVP note and we will do our best to accommodate." },
-    { q: "When should I RSVP?",
-      a: "We would truly appreciate it if you could RSVP as soon as possible. Kindly respond by <strong>30 November 2026</strong> so we can finalise our arrangements. If we do not receive your response by then, we will sadly assume that you are unable to attend." },
-    { q: "Can I take photos?",
-      a: "We'd love for you to capture and share the joyful moments throughout our celebration! During the ceremony, however, we kindly ask that you refrain from blocking the aisle or interrupting our photographers and videographers, so they can beautifully document this once-in-a-lifetime moment. Thank you for helping us preserve these precious memories. 🤍" }
+    "A smile caught our attention, and a little effort turned into something more.",
+    "From getting to know each other to exchanging numbers on Sports Day, we never really knew where it would lead. Seven years later, we've shared more memories than we could have imagined, and grown through all the good and difficult moments together.",
+    "Seven years, countless memories, and many ups and downs later, here we are.",
+    "Still together, still growing, and now, getting married. ♡"
   ],
 
   /* Google Apps Script web-app URL. Leave "" until it's deployed:
@@ -781,13 +737,6 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;"
 /* ---------- Paint all content ---------- */
 function paint(){
   const d  = new Date(CONFIG.datetime);
-  const dd = String(d.getDate()).padStart(2,"0");
-  const mm = String(d.getMonth()+1).padStart(2,"0");
-
-  $("#c-groom").textContent = CONFIG.groom;
-  $("#c-bride").textContent = CONFIG.bride;
-  $("#c-date").textContent  = `${dd} . ${mm} . ${d.getFullYear()}`;
-  $("#env-mono").textContent = `${CONFIG.groom.charAt(0)} & ${CONFIG.bride.charAt(0)}`;
 
   $("#parents").innerHTML = CONFIG.parents.map(side =>
     `<div class="pair">${side.map(n => `<strong>${esc(n)}</strong>`).join('<span class="amp">&amp;</span>')}</div>`
@@ -817,8 +766,6 @@ function paint(){
   $("#r-pax").innerHTML = Array.from({length:CONFIG.maxPax}, (_,i) => `<option>${i+1}</option>`).join("");
   $("#r-deadline").textContent = CONFIG.rsvpDeadline;
 
-  $("#faq").innerHTML = CONFIG.faq.map(f => `<details><summary>${esc(f.q)}</summary><div class="a">${f.a}</div></details>`).join("");
-
   $("#qr-pair").innerHTML = CONFIG.gifts.map(g => `
     <div class="qr-box">
       <img src="${g.qr}" alt="DuitNow QR for ${esc(g.name)}">
@@ -839,7 +786,6 @@ function paint(){
       </div>
     </div>`).join("");
 
-  $("#credit").innerHTML = `${esc(CONFIG.groom)} &amp; ${esc(CONFIG.bride)} &middot; ${d.getFullYear()}`;
   $("#a-cal").href = icsHref();
 }
 
@@ -909,8 +855,7 @@ async function sendRSVP(){
 
   const ok = await post({
     kind:"rsvp", name, attend,
-    pax: attend === "Yes" ? Number($("#r-pax").value) : 0,
-    note: $("#r-note").value.trim()
+    pax: attend === "Yes" ? Number($("#r-pax").value) : 0
   });
 
   if (ok){ $("#rsvp-ok").classList.add("show"); btn.textContent = "RSVP sent"; }
@@ -937,12 +882,31 @@ async function sendWish(){
   }else{ btn.disabled = false; btn.textContent = "Try again"; }
 }
 
+/* ---------- Lace ring around the hero video ---------- */
+(function buildHeroLace(){
+  const g = document.getElementById("hero-lace-dots");
+  if (!g) return;
+  const ns = "http://www.w3.org/2000/svg";
+  const cx = 110, cy = 110, r = 103, count = 28;
+  for (let i = 0; i < count; i++){
+    const a = (i / count) * Math.PI * 2;
+    const x = cx + r * Math.sin(a);
+    const y = cy - r * Math.cos(a);
+    const c = document.createElementNS(ns, "circle");
+    c.setAttribute("cx", x.toFixed(2));
+    c.setAttribute("cy", y.toFixed(2));
+    if (i % 2 === 0){ c.setAttribute("r", "2.6"); c.setAttribute("class", "lace-ring-o"); }
+    else { c.setAttribute("r", "1.4"); c.setAttribute("class", "lace-ring-d"); }
+    g.appendChild(c);
+  }
+})();
+
 /* ---------- Wiring ---------- */
 paint();
 loadWishes();
 timer = setInterval(tick, 1000); tick();
 
-$("#btn-open").addEventListener("click", () => {
+$("#cover").addEventListener("click", () => {
   const cover = $("#cover");
   cover.classList.add("lifted");
   document.body.classList.remove("is-locked");
